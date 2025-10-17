@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <div>
       <nav className="relative bg-white shadow ">
-        <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
+        <div className="container lg:px-0 px-2 py-4 mx-auto md:flex md:justify-between md:items-center">
           {/* Logo & Mobile Button */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
