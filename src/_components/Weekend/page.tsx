@@ -3,7 +3,7 @@ import React from "react";
 
 const Weekend = () => {
   return (
-    <div className="container mx-auto my-20">
+    <div className="container mx-auto lg:my-20 my-10">
       <div className="flex lg:items-center lg:flex-row flex-col justify-between gap-4">
         <div className="bg-[#fb7a14] lg:p-8 px-6 flex-1">
           <div className="flex items-center justify-between">
