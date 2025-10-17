@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Rajdhani } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/_components/Navbar/page";
 
 export const metadata: Metadata = {
   title: "LibroHub",
@@ -14,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={rajdhani.className}>{children}</body>
+      <body className={rajdhani.className}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
