@@ -88,7 +88,7 @@ const Navbar = () => {
                 All Books
               </Link>
               <Link
-                href="addbooks"
+                href="/api/add-book"
                 className="my-2 lg:text-gray-900 text-gray-200 transition-colors duration-300 transform  md:mx-4 md:my-0"
               >
                 Add Books

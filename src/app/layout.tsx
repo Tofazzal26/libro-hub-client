@@ -3,6 +3,7 @@ import { Rajdhani } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/_components/Navbar/page";
 import Footer from "@/_components/Footer/page";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "LibroHub",
@@ -20,6 +21,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <Toaster />
       </body>
     </html>
   );
