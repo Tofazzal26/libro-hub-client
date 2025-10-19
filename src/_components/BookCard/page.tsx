@@ -1,16 +1,38 @@
-import { Book } from "@/redux/features/booksApi";
+import { Book, useDeleteBooksMutation } from "@/redux/features/booksApi";
 import { BookPlus, Eraser, Trash } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-
+import Swal from "sweetalert2";
 interface BookCardProps {
   book: Book;
 }
 
 const BookCard: React.FC<BookCardProps> = ({ book }) => {
+  const [deleteBook] = useDeleteBooksMutation();
+  const handleDeleteBook = (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to Delete",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await deleteBook(id);
+        Swal.fire({
+          title: "Deleted",
+          text: "Your Book has been deleted.",
+          icon: "success",
+        });
+      }
+    });
+  };
+
   return (
     <div className="lg:px-0 px-2">
-      <div className="border-[1px] border-gray-300 rounded-md p-4">
+      <div className="border-[1px] border-gray-300 rounded-md p-4 h-full">
         <div>
           <div>
             <div className="bg-[#ebecf0] rounded-md p-14 relative flex items-center justify-center flex-col">
@@ -38,13 +60,16 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
             <p className="text-lg text-[#012e4a] ">{book?.title}</p>
             <p className="text-[#64677d] my-2 text-sm">{book?.description}</p>
             <div className="flex items-center justify-between mt-4">
-              <button className="bg-[#b8393a] flex items-center gap-1 px-2 py-[6px] rounded-sm text-white text-sm">
+              <button
+                onClick={() => handleDeleteBook(book?._id)}
+                className="bg-[#b8393a] flex items-center gap-1 px-2 py-[6px] rounded-sm text-white text-sm cursor-pointer"
+              >
                 Delete <Trash className="text-white" size={14} />
               </button>
-              <button className="bg-blue-400 flex items-center gap-1 px-2 py-[6px] rounded-sm text-white text-sm">
+              <button className="bg-blue-400 flex items-center gap-1 px-2 py-[6px] rounded-sm text-white text-sm cursor-pointer">
                 Edit <Eraser className="text-white" size={14} />
               </button>
-              <button className="bg-green-800 flex items-center gap-1 px-2 py-[6px] rounded-sm text-white text-sm">
+              <button className="bg-green-800 flex items-center gap-1 px-2 py-[6px] rounded-sm text-white text-sm cursor-pointer">
                 Borrow
                 <BookPlus className="text-white" size={14} />
               </button>
