@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/_components/Navbar/page";
 import Footer from "@/_components/Footer/page";
 import { Toaster } from "react-hot-toast";
+import ReduxProvider from "@/_components/ReduxProvider/page";
 
 export const metadata: Metadata = {
   title: "LibroHub",
@@ -18,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={rajdhani.className}>
-        <Navbar />
-        {children}
-        <Footer />
-        <Toaster />
+        <ReduxProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          <Toaster />
+        </ReduxProvider>
       </body>
     </html>
   );

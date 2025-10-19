@@ -49,8 +49,8 @@ const AdBook = () => {
       const description = data.description;
       const author = data.author;
       const genre = data.genre;
-      const isbn = data.isbn;
-      const copies = data.copies;
+      const isbn = Number(data.isbn);
+      const copies = Number(data.copies);
       const allData = {
         image,
         title,
