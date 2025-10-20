@@ -1,10 +1,12 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const path = usePathname();
 
   return (
     <div>
@@ -77,25 +79,41 @@ const Navbar = () => {
             <div className="flex flex-col md:flex-row md:mx-6">
               <Link
                 href="/"
-                className="my-2 lg:text-gray-900 text-gray-200 transition-colors duration-300 transform  md:mx-4 md:my-0"
+                className={`my-2  text-gray-200 transition-colors duration-300 transform  md:mx-4 md:my-0 ${
+                  path === "/"
+                    ? "lg:text-red-800 text-red-800"
+                    : "lg:text-gray-900 text-gray-200"
+                }`}
               >
                 Home
               </Link>
               <Link
                 href="/api/all-book"
-                className="my-2 lg:text-gray-900 text-gray-200 transition-colors duration-300 transform  md:mx-4 md:my-0"
+                className={`my-2  text-gray-200 transition-colors duration-300 transform  md:mx-4 md:my-0 ${
+                  path === "/api/all-book"
+                    ? "lg:text-red-800 text-red-800"
+                    : "lg:text-gray-900 text-gray-200"
+                }`}
               >
                 All Books
               </Link>
               <Link
                 href="/api/add-book"
-                className="my-2 lg:text-gray-900 text-gray-200 transition-colors duration-300 transform  md:mx-4 md:my-0"
+                className={`my-2  text-gray-200 transition-colors duration-300 transform  md:mx-4 md:my-0 ${
+                  path === "/api/add-book"
+                    ? "lg:text-red-800 text-red-800"
+                    : "lg:text-gray-900 text-gray-200"
+                }`}
               >
                 Add Books
               </Link>
               <Link
-                href="borrow"
-                className="my-2 lg:text-gray-900 text-gray-200 transition-colors duration-300 transform  md:mx-4 md:my-0"
+                href="/borrow"
+                className={`my-2  text-gray-200 transition-colors duration-300 transform  md:mx-4 md:my-0 ${
+                  path === "/borrow"
+                    ? "lg:text-red-800 text-red-800"
+                    : "lg:text-gray-900 text-gray-200"
+                }`}
               >
                 Borrow
               </Link>

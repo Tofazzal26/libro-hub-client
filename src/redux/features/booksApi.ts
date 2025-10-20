@@ -49,6 +49,14 @@ export const booksApi = createApi({
       }),
       invalidatesTags: ["Books"] as const,
     }),
+    bookPost: builder.mutation<Book, Partial<Book>>({
+      query: (data) => ({
+        url: "/create-book",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Books"] as const,
+    }),
   }),
 });
 
@@ -57,4 +65,5 @@ export const {
   useDeleteBooksMutation,
   useSingleBookQuery,
   useSingleBookUpdateMutation,
+  useBookPostMutation,
 } = booksApi;
