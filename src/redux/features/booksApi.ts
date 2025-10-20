@@ -31,7 +31,15 @@ export const booksApi = createApi({
       }),
       invalidatesTags: ["Books"] as const,
     }),
+    singleBook: builder.query<Book, string>({
+      query: (id) => ({
+        url: `/books/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Books"] as const,
+    }),
   }),
 });
 
-export const { useGetBooksQuery, useDeleteBooksMutation } = booksApi;
+export const { useGetBooksQuery, useDeleteBooksMutation, useSingleBookQuery } =
+  booksApi;
