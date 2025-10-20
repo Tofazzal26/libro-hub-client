@@ -1,7 +1,7 @@
 import { Book, useDeleteBooksMutation } from "@/redux/features/booksApi";
-import { BookPlus, Eraser, Trash } from "lucide-react";
+import { BookPlus, Trash } from "lucide-react";
 import Image from "next/image";
-import React, { useState } from "react";
+
 import Swal from "sweetalert2";
 import EditBookModal from "../EditBookModal/page";
 interface BookCardProps {
@@ -48,7 +48,11 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
               <span className="bg-gray-200 px-2 py-[6px] text-black absolute left-0 bottom-4 text-[12px] rounded-sm">
                 Copies: {book?.copies}
               </span>
-              <span className="bg-gray-200 px-2 py-[6px] text-black absolute right-0 bottom-4 text-[12px] rounded-sm">
+              <span
+                className={`bg-gray-200 px-2 py-[6px]  absolute right-0 bottom-4 text-[12px] rounded-sm ${
+                  book?.availability === true ? "text-black" : "text-red-400"
+                }`}
+              >
                 {book?.availability === true ? "In-Stock" : "Out-Stock"}
               </span>
             </div>

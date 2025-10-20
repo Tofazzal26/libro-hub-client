@@ -38,8 +38,23 @@ export const booksApi = createApi({
       }),
       providesTags: ["Books"] as const,
     }),
+    singleBookUpdate: builder.mutation<
+      Book,
+      { id: string; data: Partial<Book> }
+    >({
+      query: ({ id, data }) => ({
+        url: `/books/update/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Books"] as const,
+    }),
   }),
 });
 
-export const { useGetBooksQuery, useDeleteBooksMutation, useSingleBookQuery } =
-  booksApi;
+export const {
+  useGetBooksQuery,
+  useDeleteBooksMutation,
+  useSingleBookQuery,
+  useSingleBookUpdateMutation,
+} = booksApi;

@@ -8,13 +8,17 @@ import {
   DialogTrigger,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useSingleBookQuery } from "@/redux/features/booksApi";
+import {
+  useSingleBookQuery,
+  useSingleBookUpdateMutation,
+} from "@/redux/features/booksApi";
 import { Eraser } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
 
 interface Iid {
-  id: string | null;
+  id: string;
 }
 
 interface ISingle {
@@ -31,9 +35,15 @@ interface ISingle {
 
 const EditBookModal: React.FC<Iid> = ({ id }) => {
   const [open, setOpen] = useState(false);
-  const { data: singleBook, isLoading } = useSingleBookQuery(id!, {
-    skip: !id, // যদি id null হয় তাহলে fetch বন্ধ রাখবে
+
+  // Single book fetch
+  const { data: singleBook, isLoading } = useSingleBookQuery(id, {
+    skip: !id,
   });
+
+  // Update mutation
+  const [singleBookUpdate, { isLoading: bookUpdateLoading }] =
+    useSingleBookUpdateMutation();
 
   type Inputs = {
     title: string;
@@ -51,11 +61,9 @@ const EditBookModal: React.FC<Iid> = ({ id }) => {
     reset,
   } = useForm<Inputs>();
 
+  // Modal open/close
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
-    if (isOpen) {
-      console.log("Modal opened for book id:", id);
-    }
   };
 
   useEffect(() => {
@@ -71,23 +79,23 @@ const EditBookModal: React.FC<Iid> = ({ id }) => {
     }
   }, [singleBook, reset]);
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const title = data.title;
-    const description = data.description;
-    const author = data.author;
-    const genre = data.genre;
-    const isbn = Number(data.isbn);
-    const copies = Number(data.copies);
-    const availability = true;
-    console.log({
-      title,
-      description,
-      author,
-      genre,
-      isbn,
-      copies,
-      availability,
-    });
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    if (!id) return;
+
+    const allData = {
+      ...data,
+      isbn: Number(data.isbn),
+      copies: Number(data.copies),
+      availability: data.copies === 0 ? false : true,
+    };
+
+    try {
+      const res = await singleBookUpdate({ id, data: allData });
+      toast.success("Book Update Success");
+      setOpen(false);
+    } catch (error) {
+      console.error("Update failed:", error);
+    }
   };
 
   return (
@@ -102,7 +110,9 @@ const EditBookModal: React.FC<Iid> = ({ id }) => {
         <DialogTitle>Edit Book</DialogTitle>
 
         {isLoading ? (
-          <p className="text-center py-6 text-gray-500">Loading...</p>
+          <div className="flex justify-center items-center my-4 lg:my-8">
+            <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-[#b8393a]"></div>
+          </div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mx-auto howCardShadow lg:p-8 p-4 border border-gray-400 rounded-md">
@@ -187,7 +197,7 @@ const EditBookModal: React.FC<Iid> = ({ id }) => {
                   type="submit"
                   className="bg-[#074c3e] px-4 py-[10px] text-white rounded-md"
                 >
-                  Update Book
+                  {bookUpdateLoading ? "Updating..." : "Update Book"}
                 </button>
               </div>
             </div>

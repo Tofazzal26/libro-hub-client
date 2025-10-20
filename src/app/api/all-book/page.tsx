@@ -6,8 +6,6 @@ import React from "react";
 const AllBook = () => {
   const { data: books, isLoading } = useGetBooksQuery();
 
-  console.log(books);
-
   return (
     <div className="container mx-auto">
       <div className="my-10">
