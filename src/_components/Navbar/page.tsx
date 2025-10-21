@@ -108,9 +108,9 @@ const Navbar = () => {
                 Add Books
               </Link>
               <Link
-                href="/borrow"
+                href="/api/borrow"
                 className={`my-2  text-gray-200 transition-colors duration-300 transform  md:mx-4 md:my-0 ${
-                  path === "/borrow"
+                  path === "/api/borrow"
                     ? "lg:text-red-800 text-red-800"
                     : "lg:text-gray-900 text-gray-200"
                 }`}

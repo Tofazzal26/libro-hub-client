@@ -12,6 +12,15 @@ export interface Book {
   availability: boolean;
 }
 
+export interface IBorrow {
+  image: string;
+  title: string;
+  quantity: number;
+  isbn: number;
+  dueDate: string;
+  bookId: string;
+}
+
 export const booksApi = createApi({
   reducerPath: "booksApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
@@ -57,6 +66,17 @@ export const booksApi = createApi({
       }),
       invalidatesTags: ["Books"] as const,
     }),
+    borrowBook: builder.mutation<
+      IBorrow,
+      { bookId: string; data: Partial<IBorrow> }
+    >({
+      query: ({ bookId, data }) => ({
+        url: `/borrow/${bookId}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Books"] as const,
+    }),
   }),
 });
 
@@ -66,4 +86,5 @@ export const {
   useSingleBookQuery,
   useSingleBookUpdateMutation,
   useBookPostMutation,
+  useBorrowBookMutation,
 } = booksApi;

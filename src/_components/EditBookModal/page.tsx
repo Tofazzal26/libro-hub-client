@@ -36,12 +36,10 @@ interface ISingle {
 const EditBookModal: React.FC<Iid> = ({ id }) => {
   const [open, setOpen] = useState(false);
 
-  // Single book fetch
   const { data: singleBook, isLoading } = useSingleBookQuery(id, {
     skip: !id,
   });
 
-  // Update mutation
   const [singleBookUpdate, { isLoading: bookUpdateLoading }] =
     useSingleBookUpdateMutation();
 
@@ -61,7 +59,6 @@ const EditBookModal: React.FC<Iid> = ({ id }) => {
     reset,
   } = useForm<Inputs>();
 
-  // Modal open/close
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
   };

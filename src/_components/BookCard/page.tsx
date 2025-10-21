@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import Swal from "sweetalert2";
 import EditBookModal from "../EditBookModal/page";
+import BorrowModal from "../BorrowModal/page";
 interface BookCardProps {
   book: Book;
 }
@@ -74,10 +75,13 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
               </button>
 
               <EditBookModal id={book?._id} />
-              <button className="bg-green-800 flex items-center gap-1 px-2 py-[6px] rounded-sm text-white text-sm cursor-pointer">
-                Borrow
-                <BookPlus className="text-white" size={14} />
-              </button>
+              <BorrowModal
+                id={book?._id}
+                title={book?.title}
+                isbn={book?.isbn}
+                copies={book?.copies}
+                image={book?.image}
+              />
             </div>
           </div>
         </div>
