@@ -8,7 +8,7 @@ Built with Next.js, Redux Toolkit, Express, MongoDB (Mongoose), and Tailwind CSS
 
 
 
-![Multi-Site Image](https://i.ibb.co.co/nNDTbJ5X/librohub.png)
+![Librohub Image](https://i.ibb.co.co/nNDTbJ5X/librohub.png)
 
 
 ### 🚀 Features
