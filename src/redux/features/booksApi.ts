@@ -23,7 +23,9 @@ export interface IBorrow {
 
 export const booksApi = createApi({
   reducerPath: "booksApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://librohub-server-pi.vercel.app",
+  }),
   tagTypes: ["Books"],
   endpoints: (builder) => ({
     getBooks: builder.query({
