@@ -26,13 +26,14 @@ export const booksApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
   tagTypes: ["Books"],
   endpoints: (builder) => ({
-    getBooks: builder.query<Book[], void>({
-      query: () => ({
-        url: "/books",
+    getBooks: builder.query({
+      query: ({ page = 1, limit = 8 }) => ({
+        url: `/books?page=${page}&limit=${limit}`,
         method: "GET",
       }),
-      providesTags: ["Books"] as const,
+      providesTags: ["Books"],
     }),
+
     deleteBooks: builder.mutation<{ message: string }, string>({
       query: (id) => ({
         url: `/books/${id}`,

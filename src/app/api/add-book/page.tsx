@@ -88,7 +88,6 @@ const AdBook = () => {
             />
           </div>
 
-          {/* Title & Author */}
           <div className="flex items-center gap-2">
             <div className="flex-1">
               <label className="text-gray-500">Title *</label>
@@ -121,7 +120,6 @@ const AdBook = () => {
             </div>
           </div>
 
-          {/* Genre & ISBN */}
           <div className="flex items-center gap-2">
             <div className="flex-1">
               <label className="text-gray-500">Genre *</label>
@@ -154,7 +152,6 @@ const AdBook = () => {
             </div>
           </div>
 
-          {/* Copies */}
           <div>
             <label className="text-gray-500">Copies *</label>
             <br />
@@ -170,7 +167,6 @@ const AdBook = () => {
             )}
           </div>
 
-          {/* Description */}
           <div className="mt-4">
             <label className="text-gray-500">Description *</label>
             <textarea
@@ -190,7 +186,7 @@ const AdBook = () => {
           <div className="flex justify-end mt-4">
             <button
               type="submit"
-              className={`px-4 py-[10px] rounded-md text-white ${
+              className={`px-4 py-[10px] cursor-pointer rounded-md text-white ${
                 isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#074c3e]"
               }`}
               disabled={isLoading}
