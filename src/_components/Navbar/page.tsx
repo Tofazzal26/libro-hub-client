@@ -121,7 +121,7 @@ const Navbar = () => {
 
             <div className="flex justify-center md:block">
               <Link
-                href="/cart"
+                href="/"
                 className="relative lg:text-gray-900 text-gray-200 transition-colors duration-300 transform "
               >
                 <svg
